@@ -18,37 +18,6 @@ function response(statusCode, body, extraHeaders = {}) {
   };
 }
 
-function decodeBasicAuth(headerValue) {
-  if (!headerValue || !headerValue.startsWith('Basic ')) return null;
-  try {
-    const decoded = Buffer.from(headerValue.slice(6), 'base64').toString('utf8');
-    const separator = decoded.indexOf(':');
-    if (separator < 0) return null;
-    return {
-      username: decoded.slice(0, separator),
-      password: decoded.slice(separator + 1),
-    };
-  } catch {
-    return null;
-  }
-}
-
-function isAuthorized(params) {
-  const expectedUsername = params.BASIC_AUTH_USERNAME;
-  const expectedPassword = params.BASIC_AUTH_PASSWORD;
-
-  if (!expectedUsername && !expectedPassword) return true;
-
-  const headers = params.__ow_headers || {};
-  const credentials = decodeBasicAuth(headers.authorization || headers.Authorization);
-
-  return Boolean(
-    credentials &&
-      credentials.username === expectedUsername &&
-      credentials.password === expectedPassword,
-  );
-}
-
 function parseBoolean(value) {
   if (typeof value === 'boolean') return value;
   if (value === 1 || value === '1' || value === 'true') return true;
@@ -235,14 +204,6 @@ async function getCommerceProduct({ baseUrl, sku, token, storeCode, logger }) {
 
 export async function main(params) {
   const logger = Core.Logger('get-purchasing-status', { level: params.LOG_LEVEL || 'info' });
-
-  if (!isAuthorized(params)) {
-    return response(
-      401,
-      { error: 'UNAUTHORIZED', message: 'Invalid Basic Auth credentials.' },
-      { 'www-authenticate': 'Basic realm="Backorder API"' },
-    );
-  }
 
   const sku = String(params.sku || '').trim();
   if (!sku) {
