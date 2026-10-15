@@ -36,7 +36,6 @@ function parseBoolean(value) {
  * When use_config_backorders = true the product inherits the store-level
  * global setting. Commerce REST does not return the resolved global value on
  * the product payload, so we fall back to 0 (safe default) and surface a
- * warning to the caller.
  */
 function deriveBackorders(stockItem) {
   if (!stockItem) return 0;
