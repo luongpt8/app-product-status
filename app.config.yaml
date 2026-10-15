@@ -1,0 +1,20 @@
+application:
+  actions: actions
+  runtimeManifest:
+    packages:
+      backorder:
+        license: Apache-2.0
+        actions:
+          get-purchasing-status:
+            function: src/actions/get-purchasing-status/index.js
+            web: 'yes'
+            runtime: nodejs:24
+            inputs:
+              COMMERCE_BASE_URL: $COMMERCE_BASE_URL
+              COMMERCE_STORE_CODE: $COMMERCE_STORE_CODE
+              COMMERCE_AUTH_TOKEN: $COMMERCE_AUTH_TOKEN
+              BASIC_AUTH_USERNAME: $BASIC_AUTH_USERNAME
+              BASIC_AUTH_PASSWORD: $BASIC_AUTH_PASSWORD
+            annotations:
+              require-adobe-auth: false
+              final: true

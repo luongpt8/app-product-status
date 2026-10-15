@@ -1,0 +1,42 @@
+# package directories
+node_modules
+jspm_packages
+
+# logging
+logs
+*.log
+
+# build
+build
+dist
+.manifest-dist.yml
+
+# Config
+.env
+.aio
+.mesh
+.github/workflows/mirror.yml
+
+# Adobe I/O console config
+console.json
+ws.json
+testMesh.txt
+
+# IDE & Temp
+.cache
+.idea
+.nyc_output
+.vscode
+.cursor
+coverage
+.aws.tmp.creds.json
+.wskdebug.props.tmp
+
+# Parcel
+.parcel-cache
+
+# OSX
+.DS_Store
+
+# yeoman
+.yo-repository

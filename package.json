@@ -1,0 +1,21 @@
+{
+  "name": "backorder-app-builder-poc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test",
+    "build": "aio app build",
+    "deploy": "aio app deploy"
+  },
+  "dependencies": {
+    "@adobe/aio-sdk": "^6.0.0",
+    "@adobe/aio-lib-core-logging": "^3.0.1"
+  },
+  "devDependencies": {
+    "@adobe/aio-cli": "^11.0.0"
+  }
+}
